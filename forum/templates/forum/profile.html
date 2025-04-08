@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ profile_user.username }}'s Profile - QuoraClone{% endblock %}
+{% block content %}
+<h3>{{ profile_user.username }}</h3>
+<p>Email: {{ profile_user.email }}</p>
+<h5>Questions Asked:</h5>
+{% for question in profile_user.questions.all %}
+<div class="card mb-2">
+    <div class="card-body">
+        <a href="/question/{{ question.id }}/">{{ question.title }}</a>
+    </div>
+</div>
+{% empty %}<p>No questions asked.</p>{% endfor %}
+{% endblock %}

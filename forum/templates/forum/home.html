@@ -1,0 +1,16 @@
+{% extends 'forum/base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h4 class="fw-bold">Top Questions</h4>
+        <a class="btn btn-quora" href="{% url 'ask' %}">Ask Question</a>
+    </div>
+    {% for question in questions %}
+        <div class="card mb-3 p-3">
+            <h5><a href="{% url 'question_detail' question.pk %}" class="text-dark">{{ question.title }}</a></h5>
+            <small class="text-muted">Asked by {{ question.user.username }} • {{ question.created_at|timesince }} ago</small>
+        </div>
+    {% empty %}
+        <p>No questions posted yet.</p>
+    {% endfor %}
+{% endblock %}
